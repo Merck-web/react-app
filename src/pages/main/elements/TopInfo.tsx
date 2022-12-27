@@ -1,6 +1,7 @@
 import React, {FC, useEffect} from 'react';
 import SelectDefault from "../../../components/SelectDefault";
 import axios from "axios";
+import TextWithIcon from "../../../components/TextWithIcon";
 
 
 const TopInfo: FC = () => {
@@ -26,41 +27,48 @@ const TopInfo: FC = () => {
         }
     }
 
-    const getRussiaCities = async () => {
-
-        // const res = await axios.get(`https://api.vk.com/method/database.getCountries?access_token=${process.env.REACT_APP_SERVICES_VK_API_KEY}&count=20&v=5.131`);
-        const res = fetch(`https://api.vk.com/method/database.getCountries?access_token=${process.env.REACT_APP_SERVICES_VK_API_KEY}&count=20&v=5.131`)
-            .then(response => console.log(response));
-        // console.log(res)
-    }
 
     useEffect(() => {
-        // getUserPlace().then();
-        getRussiaCities().then()
+        getUserPlace().then();
     }, [])
 
     const data = [
         {
-            value: 'wqe',
-            name: 'wqe'
-        }
+            value: 'nt',
+            label: 'Нижний Тагил',
+        },
+        {
+            value: 'aramil',
+            label: 'Арамиль',
+        },
+        {
+            value: 'ekb',
+            label: 'Екатеринбург',
+        },
+        {
+            value: 'nevyansk',
+            label: 'Невьянск',
+        },
     ]
 
     return (
         <div className="bg-gray_white py-0.5">
             <div className="main_container flex items-center justify-between">
 
-                <div className='cursor-pointer'>
+                <div className='cursor-pointer w-full max-w-[200px]'>
                     <SelectDefault
                         data={data}
-                        after={"ArrowSelect"}
                         before={"MapMarker"}
                         text={city}
+                        tooltip={true}
                     />
                 </div>
 
                 <div className=''>
-                    time
+                    <TextWithIcon
+                        before={'CircleTime'}
+                        text={'savd'}
+                    />
                 </div>
 
                 <div className=''>
