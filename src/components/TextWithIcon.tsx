@@ -7,7 +7,9 @@ type textWithIconType = {
     text: string,
     click?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
     href?: string,
-    mail?: boolean
+    mail?: boolean,
+    phone?: boolean,
+    classes?: any
 }
 
 const TextWithIcon: FC<textWithIconType> = (
@@ -17,21 +19,23 @@ const TextWithIcon: FC<textWithIconType> = (
         text,
         click,
         href,
-        mail
+        mail,
+        phone,
+        classes
     }) => {
     return (
         <>
             {
                 href ?
-                    <a href={`${mail && 'mailto:'}${href}`} >
-                        <span className='flex items-center' onClick={click}>
+                    <a href={`${mail ? 'mailto:' : phone ? 'tel:' : ''}${href}`}>
+                        <span className={`${classes} flex items-center`} onClick={click}>
                             {before && <IconDefault name={before}/>}
                             <p className='mx-2'>{text}</p>
                             {after && <IconDefault name={after}/>}
                         </span>
                     </a>
                     :
-                    <div onClick={click} className='flex items-center'>
+                    <div onClick={click} className={`${classes} flex items-center`}>
                         {before && <IconDefault name={before}/>}
                         <p className='mx-2'>{text}</p>
                         {after && <IconDefault name={after}/>}
