@@ -1,0 +1,21 @@
+.links {
+  margin-right: 30px;
+  padding-right: 30px;
+  position: relative;
+
+  &::after {
+    position: absolute;
+    content: '';
+    top: -10px;
+    right: 0;
+    height: calc(100% + 20px);
+    width: 1px;
+    background-color: #A7A7A7;
+  }
+}
+
+.time, .mail {
+  @media (max-width: 1024px) {
+    display: none;
+  }
+}

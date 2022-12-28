@@ -55,10 +55,12 @@ const SelectDefault: FC<SelectDefaultTypes> = (
                     >
                         <div className='flex items-center'>
                             <IconDefault name={before}/>
-                            <p className='mx-2'>{selectValue ? `г. ${selectValue}` : `г. ${text}`}</p>
+                            <p className='mx-2 whitespace-nowrap'>{selectValue ? `г. ${selectValue}` : `г. ${text}`}</p>
                             <IconDefault name={after}/>
                         </div>
-                    </Tooltip> : <div className='flex items-center'>
+                    </Tooltip>
+                    :
+                    <div className='flex items-center'>
                         <IconDefault name={before}/>
                         <p className='mx-1'>{text}</p>
                         <IconDefault name={after}/>
