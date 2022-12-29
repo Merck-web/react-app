@@ -3,9 +3,7 @@ import styles from '../elementscss/Header.module.scss'
 import {Link} from "react-router-dom";
 import TextWithIcon from "../../../components/TextWithIcon";
 import IconDefault from "../../../components/IconDefault";
-import {FormControl, InputAdornment, OutlinedInput, styled} from "@mui/material";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faDeleteLeft, faSearch } from "@fortawesome/free-solid-svg-icons";
+import CustomizedInputs from "../../../components/CustomInput";
 
 
 
@@ -32,25 +30,6 @@ function Header({}) {
         }
     ];
 
-    const StyledInput = styled(OutlinedInput)`
-      & .Mui-focused,
-      & .MuiOutlinedInput-input {
-        border-color: #D2334D !important;
-      }
-
-      & .MuiOutlinedInput-notchedOutline {
-        border-color: #D2334D !important;
-      }
-    `;
-
-    function searchTerm(e) {
-        console.log(e.target.value)
-        e.preventDefault()
-        e.stopPropagation()
-
-        setTargetSearch(e.target.value)
-    }
-
     function deleteSearchTermValue() {
         setTargetSearch("")
     }
@@ -70,29 +49,15 @@ function Header({}) {
                     </div>
                     <div className={'max-w-[750px] w-full'}>
 
-                        <FormControl className={`w-full ${styles.search_home}`} variant="outlined">
-                            <OutlinedInput
-                                id="outlined-adornment-weight"
-                                endAdornment={
-                                    <InputAdornment position="end">
-                                        <FontAwesomeIcon
-                                            className={'mr-2 cursor-pointer'}
-                                            icon={faDeleteLeft}
-                                            color={'#D2334D'}
-                                            onClick={deleteSearchTermValue}
-                                        />
-                                        <FontAwesomeIcon
-                                            className={'mr-2 cursor-pointer'}
-                                            icon={faSearch}
-                                            color={'#D2334D'}
-                                            onClick={getSearchTermValue}
-                                        />
-                                    </InputAdornment>
-                                }
-                                onChange={e => setTargetSearch(e.target.value)}
-                                value={targetSearch}
-                            />
-                        </FormControl>
+
+                        {/*{CustomizedInputs({variant:'outlined', backgroundColor: "#D2334D", setValue: setTargetSearch, value: targetSearch} )}*/}
+
+                        <CustomizedInputs
+                            variant={'outlined'}
+                            backgroundColor={'#D2334D'}
+                            setValue={setTargetSearch}
+                            value={targetSearch}
+                        />
 
                     </div>
                     <div>
