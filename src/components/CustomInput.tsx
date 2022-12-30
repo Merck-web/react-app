@@ -4,7 +4,6 @@ import TextField, {TextFieldProps} from '@mui/material/TextField';
 import {FormControl, InputAdornment} from "@mui/material";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faDeleteLeft, faSearch} from "@fortawesome/free-solid-svg-icons";
-import {makeStyles} from "tss-react/mui";
 
 
 type CustomizeInputsTypes = {
@@ -74,7 +73,6 @@ const CustomizedInputs: FC<CustomizeInputsTypes> = ({
                     }}
                     variant={variant}
                     value={value}
-                    style={{marginTop: 11}}
                     onChange={event => newValueSet(event)}
                     InputProps={
                         {

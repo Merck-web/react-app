@@ -1,15 +1,16 @@
-import React from 'react';
+import React, {RefObject, useRef} from 'react';
 import styles from '../elementscss/Header.module.scss'
 import {Link} from "react-router-dom";
 import TextWithIcon from "../../../components/TextWithIcon";
 import IconDefault from "../../../components/IconDefault";
 import CustomizedInputs from "../../../components/CustomInput";
+import ModalDefault from "../../../components/Modal";
 
 
 
 function Header({}) {
     const [targetSearch, setTargetSearch] = React.useState("");
-
+    const modal =  useRef();
 
     const socials = [
         {
@@ -38,6 +39,11 @@ function Header({}) {
         console.log(targetSearch)
     }
 
+    function openModalCalling() {
+        // @ts-ignore
+        modal.current!.handleOpen()
+    }
+
     return (
         <>
             <div className={'main_container'}>
@@ -49,8 +55,6 @@ function Header({}) {
                     </div>
                     <div className={'max-w-[750px] w-full'}>
 
-
-                        {/*{CustomizedInputs({variant:'outlined', backgroundColor: "#D2334D", setValue: setTargetSearch, value: targetSearch} )}*/}
 
                         <CustomizedInputs
                             variant={'outlined'}
@@ -69,7 +73,11 @@ function Header({}) {
                             classes={["text-[#D2334D] font-bold text-[24px] cursor-pointer"]}
                         />
                         <span
-                            className={`${styles.calling} text-[#D2334D] text-[12px] leading-[20px] font-semibold cursor-pointer`}>Заказать звонок</span>
+                            className={`${styles.calling} text-[#D2334D] text-[12px] leading-[20px] font-semibold cursor-pointer`}
+                            onClick={openModalCalling}
+                        >
+                            Заказать звонок
+                        </span>
                     </div>
                     <div className={'socials_box'}>
                         <ul className={'flex items-center'}>
@@ -92,6 +100,11 @@ function Header({}) {
                 </div>
             </div>
 
+            <ModalDefault
+                // @ts-ignore
+                ref={modal}
+                width={600}
+            />
         </>
     );
 }
