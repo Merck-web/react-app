@@ -2,11 +2,12 @@ import React, {FC} from 'react';
 import icons from '../assets/icons/icons';
 
 type BaseIconTypes = {
-    name: keyof typeof icons
+    name?: string
 }
 
 const IconDefault: FC<BaseIconTypes> = ({name}) => {
-    const htmlText = icons[name];
+
+    const htmlText = icons[name] || '';
     return (
         <div
             className='cursor-pointer'

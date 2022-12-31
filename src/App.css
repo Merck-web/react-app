@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "assets/css/index.scss";
+
 .main_container {
     max-width: 1470px;
     width: 100%;
