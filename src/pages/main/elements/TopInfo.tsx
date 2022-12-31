@@ -1,14 +1,13 @@
 import React, {FC, useEffect} from 'react';
-import SelectDefault from "../../../components/SelectDefault";
 import axios from "axios";
 import TextWithIcon from "../../../components/TextWithIcon";
 import {Link} from "react-router-dom";
 import styles from '../elementscss/TopInfo.module.scss';
-import BurgerButton from "../../../components/BurgerButton";
+import {Button, Tooltip} from "@mui/material";
 
 
 const TopInfo: FC = () => {
-        const [city, setCity] = React.useState('Ваш город');
+        const [city, setCity] = React.useState('Москва');
 
         const getUserPlace = async () => {
             const res = await axios.get('https://api.ipify.org?format=json', {})
@@ -38,25 +37,6 @@ const TopInfo: FC = () => {
         };
 
 
-        const data = [
-            {
-                value: 'nt',
-                label: 'Нижний Тагил',
-            },
-            {
-                value: 'aramil',
-                label: 'Арамиль',
-            },
-            {
-                value: 'ekb',
-                label: 'Екатеринбург',
-            },
-            {
-                value: 'nevyansk',
-                label: 'Невьянск',
-            },
-        ]
-
         const links = [
             {
                 link: '/companies',
@@ -80,22 +60,35 @@ const TopInfo: FC = () => {
                     <div className={'flex items-center justify-between font-medium'}>
                         <div className={'left_nav flex justify-between items-center w-full max-w-[555px] '}>
                             <div className='cursor-pointer w-full max-w-[200px] z-10'>
-                                <SelectDefault
-                                    data={data}
-                                    before={"MapMarker"}
-                                    text={city}
-                                    tooltip={true}
-                                />
+                                {/*<Tooltip title={'213'}>*/}
+                                {/*        <TextWithIcon text={`${city === 'Ваш город?' ? "" : "г."} ${city}`} before={'MapMarker'}/>*/}
+                                {/*</Tooltip>*/}
+                                <Tooltip title={
+                                    <Button
+                                        color={'warning'}
+                                        variant="contained"
+                                    >
+                                        Ввести город
+                                    </Button>
+                                }
+                                >
+                                    <div>
+                                        <TextWithIcon text={`${city === 'Москва' ? "" : "г."} ${city}`}
+                                                      before={'MapMarker'}/>
+                                    </div>
+                                </Tooltip>
                             </div>
 
-                            <div className='whitespace-nowrap mx-2 transition ease-in-out duration-300 hover:opacity-75 max-[1024px]:hidden'>
+                            <div
+                                className='whitespace-nowrap mx-2 transition ease-in-out duration-300 hover:opacity-75 max-[1024px]:hidden'>
                                 <TextWithIcon
                                     before={'CircleTime'}
                                     text={'Пн – Пт: с 9:00 до 18:00'}
                                 />
                             </div>
 
-                            <div className={`mx-2 transition ease-in-out duration-300 hover:opacity-75 max-[1024px]:hidden`}>
+                            <div
+                                className={`mx-2 transition ease-in-out duration-300 hover:opacity-75 max-[1024px]:hidden`}>
                                 <div className='cursor-pointer'>
                                     <TextWithIcon
                                         before={'ConvertMail'}

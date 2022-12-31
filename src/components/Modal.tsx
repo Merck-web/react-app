@@ -1,4 +1,4 @@
-import React, {FC, ForwardedRef, forwardRef, Ref, useImperativeHandle} from 'react';
+import React, {FC, forwardRef, useImperativeHandle} from 'react';
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
@@ -39,15 +39,8 @@ const Fade = React.forwardRef<HTMLDivElement, FadeProps>(function Fade(props, re
 
 
 type ModalTypes = {
-    width?: number
+    width?: number,
 }
-
-type InputProps = React.DetailedHTMLProps<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    HTMLInputElement
->;
-
-
 
 const ModalDefault: FC<ModalTypes> = forwardRef(({width}, ref) => {
     const style = {

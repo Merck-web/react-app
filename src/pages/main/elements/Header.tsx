@@ -1,4 +1,4 @@
-import React, {RefObject, useRef} from 'react';
+import React, {createRef, RefObject, useRef} from 'react';
 import styles from '../elementscss/Header.module.scss'
 import {Link} from "react-router-dom";
 import TextWithIcon from "../../../components/TextWithIcon";
