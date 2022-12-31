@@ -34,17 +34,46 @@ const SelectDefault: FC<SelectDefaultTypes> = (
             {
                 tooltip ?
                     <Tooltip
+                        open
+                        sx={{
+                            backgroundColor: 'transparent',
+                            '& .MuiTooltip-tooltip': {
+                                color: '#000',
+                                backgroundColor: 'transparent'
+                            }
+                        }}
+
                         title={
-                            <div className='wrapper_autocomplit cursor-pointer p-1 '>
+                            <div className='wrapper_autocomplit cursor-pointer p-2 '>
                                 <Autocomplete
                                     disablePortal
                                     id="combo-box-demo"
                                     className={'border-white'}
                                     options={data}
                                     onChange={(event, val) => putNewLabel(val)}
-                                    sx={{width: 200}}
+                                    sx={{
+                                        width: 250,
+                                    }}
                                     renderInput={(params) =>
                                         <TextField
+                                            variant={'outlined'}
+                                            color={'secondary'}
+                                            sx={{
+                                                '& .MuiInput-underline:after': {
+                                                    backgroundColor: "#fff",
+                                                },
+                                                '& .MuiOutlinedInput-root': {
+                                                    '& fieldset': {
+                                                        backgroundColor: "#fff",
+                                                    },
+                                                    '&:hover fieldset': {
+                                                        backgroundColor: "#fff",
+                                                    },
+                                                    '&.Mui-focused fieldset': {
+                                                        backgroundColor: "#fff",
+                                                    },
+                                                },
+                                            }}
                                             {...params}
                                             label="Выберите город"
                                         />

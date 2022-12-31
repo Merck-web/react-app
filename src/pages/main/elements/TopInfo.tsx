@@ -79,7 +79,7 @@ const TopInfo: FC = () => {
 
                     <div className={'flex items-center justify-between font-medium'}>
                         <div className={'left_nav flex justify-between items-center w-full max-w-[555px] '}>
-                            <div className='cursor-pointer w-full max-w-[200px]'>
+                            <div className='cursor-pointer w-full max-w-[200px] z-10'>
                                 <SelectDefault
                                     data={data}
                                     before={"MapMarker"}
