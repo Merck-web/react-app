@@ -1,9 +1,10 @@
 import React, {FC, useEffect} from 'react';
 import axios from "axios";
-import TextWithIcon from "../../../components/TextWithIcon";
+
 import {Link} from "react-router-dom";
 import styles from '../elementscss/TopInfo.module.scss';
 import {Button, Tooltip} from "@mui/material";
+import TextWithIcon from "../../../components/TextWithIcon";
 
 
 const TopInfo: FC = () => {
@@ -60,9 +61,6 @@ const TopInfo: FC = () => {
                     <div className={'flex items-center justify-between font-medium'}>
                         <div className={'left_nav flex justify-between items-center w-full max-w-[555px] '}>
                             <div className='cursor-pointer w-full max-w-[200px] z-10'>
-                                {/*<Tooltip title={'213'}>*/}
-                                {/*        <TextWithIcon text={`${city === 'Ваш город?' ? "" : "г."} ${city}`} before={'MapMarker'}/>*/}
-                                {/*</Tooltip>*/}
                                 <Tooltip title={
                                     <Button
                                         color={'warning'}

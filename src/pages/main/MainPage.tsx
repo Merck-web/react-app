@@ -1,12 +1,17 @@
 import React, {FC} from 'react';
-import TopInfo from "./elements/TopInfo";
-import Header from "./elements/Header";
+
+
+import Meta from "../../components/Meta";
 
 const MainPage: FC = () => {
     return (
         <>
-            <TopInfo />
-            <Header />
+            <Meta
+                title={'Главня страница'}
+                lang={'ru'}
+                description={'Страница для покупи товаров, сайт для души, использую всю фантазию  и мировозрение моего фронтенда, без надзора от кого-либо, и попутно изучаю реакт'}
+            />
+            сипаенмца
         </>
     );
 };

@@ -1,16 +1,20 @@
-import React, {createRef, RefObject, useRef} from 'react';
+import React, {useRef} from 'react';
 import styles from '../elementscss/Header.module.scss'
 import {Link} from "react-router-dom";
 import TextWithIcon from "../../../components/TextWithIcon";
 import IconDefault from "../../../components/IconDefault";
 import CustomizedInputs from "../../../components/CustomInput";
 import ModalDefault from "../../../components/Modal";
+import {Button} from "@mui/material";
+import SendIcon from '@mui/icons-material/Send';
+import TransitionDiv from "../../../components/TransitionDiv";
 
 
 
-function Header({}) {
+function Header() {
     const [targetSearch, setTargetSearch] = React.useState("");
-    const modal =  useRef();
+    const [phoneCall, setPhoneCall] = React.useState("");
+    const modal = useRef();
 
     const socials = [
         {
@@ -61,6 +65,8 @@ function Header({}) {
                             backgroundColor={'#D2334D'}
                             setValue={setTargetSearch}
                             value={targetSearch}
+                            clerable={true}
+                            searchable={true}
                         />
 
                     </div>
@@ -103,8 +109,44 @@ function Header({}) {
             <ModalDefault
                 // @ts-ignore
                 ref={modal}
-                width={600}
-            />
+                width={500}
+                shadow={12}
+                modalName={'Введите ваш номер телефона'}
+                colorTitle={'#D2334D'}
+            >
+                <>
+                    <div className='p-2 my-3.5 max-w-[400px] w-full mx-auto'>
+                        <CustomizedInputs
+                            label={'Телефон'}
+                            variant={'outlined'}
+                            backgroundColor={'#D2334D'}
+                            setValue={setPhoneCall}
+                            value={phoneCall}
+                            clerable={true}
+                            mask={'+7 (999) 999-99-99'}
+                        />
+                    </div>
+                    <div className={'flex justify-center p-2'}>
+                        <TransitionDiv
+                            typeAnimation={'scaleOpacity'}
+                        >
+                            <Button
+                                variant="contained"
+                                endIcon={<SendIcon/>}
+                                size="large"
+                                style={{
+                                    borderRadius: 35,
+                                    backgroundColor: "#D2334D",
+                                    padding: "10px 20px",
+                                    fontSize: "14px"
+                                }}
+                            >
+                                Отправить заявку
+                            </Button>
+                        </TransitionDiv>
+                    </div>
+                </>
+            </ModalDefault>
         </>
     );
 }

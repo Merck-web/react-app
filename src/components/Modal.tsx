@@ -2,9 +2,10 @@ import React, {FC, forwardRef, useImperativeHandle} from 'react';
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import Typography from '@mui/material/Typography';
 import {useSpring, animated} from 'react-spring';
-
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faClose} from "@fortawesome/free-solid-svg-icons";
+import TransitionDiv from "./TransitionDiv";
 
 interface FadeProps {
     children?: React.ReactElement;
@@ -40,9 +41,13 @@ const Fade = React.forwardRef<HTMLDivElement, FadeProps>(function Fade(props, re
 
 type ModalTypes = {
     width?: number,
+    children?: React.ReactElement,
+    shadow?: number,
+    modalName?: string,
+    colorTitle?: string
 }
 
-const ModalDefault: FC<ModalTypes> = forwardRef(({width}, ref) => {
+const ModalDefault: FC<ModalTypes> = forwardRef(({width, children, shadow, modalName, colorTitle}, ref) => {
     const style = {
         position: 'absolute' as 'absolute',
         top: '50%',
@@ -50,8 +55,7 @@ const ModalDefault: FC<ModalTypes> = forwardRef(({width}, ref) => {
         transform: 'translate(-50%, -50%)',
         width: width ? width : 400,
         bgcolor: 'background.paper',
-        boxShadow: 24,
-        p: 4,
+        boxShadow: shadow ? shadow : 24,
     };
 
     useImperativeHandle(ref, () => ({
@@ -84,13 +88,15 @@ const ModalDefault: FC<ModalTypes> = forwardRef(({width}, ref) => {
                 }}
             >
                 <Fade in={open}>
-                    <Box sx={style}>
-                        <Typography id="spring-modal-title" variant="h6" component="h2">
-                            Text in a modal
-                        </Typography>
-                        <Typography id="spring-modal-description" sx={{mt: 2}}>
-                            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-                        </Typography>
+                    <Box className={`py-3`} sx={style}>
+                        <div className={'flex items-center justify-between text-xl py-3 px-5'}>
+                            <h1 className={`text-[${colorTitle ? colorTitle : 'black'}] font-semibold`}>{modalName}</h1>
+                            <TransitionDiv typeAnimation={'rotate'}>
+                                <FontAwesomeIcon onClick={handleClose} color={`${colorTitle ? colorTitle : 'black'}`} className='cursor-pointer' icon={faClose}/>
+                            </TransitionDiv>
+                        </div>
+                        <hr className='border-1.5 bg-black'/>
+                        {children}
                     </Box>
                 </Fade>
             </Modal>
