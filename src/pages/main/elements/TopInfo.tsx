@@ -5,10 +5,24 @@ import {Link} from "react-router-dom";
 import styles from '../elementscss/TopInfo.module.scss';
 import {Button, Tooltip} from "@mui/material";
 import TextWithIcon from "../../../components/TextWithIcon";
+import {Context} from "../../../App";
+
+
+import {useSelector, useDispatch} from "react-redux";
+import {RootState} from "../../../redux/store";
+import {increment} from "../../../redux/slices/counterSlice";
 
 
 const TopInfo: FC = () => {
-        const [city, setCity] = React.useState('Москва');
+        const {city, setCity, links} = React.useContext(Context);
+
+        const count = useSelector((state: RootState) => state.counter.value)
+        const dispatch = useDispatch()
+
+        function test() {
+            dispatch(increment());
+            console.log(count)
+        }
 
         const getUserPlace = async () => {
             const res = await axios.get('https://api.ipify.org?format=json', {})
@@ -38,22 +52,6 @@ const TopInfo: FC = () => {
         };
 
 
-        const links = [
-            {
-                link: '/companies',
-                name: 'Компания'
-            },
-            {
-                link: '/brands',
-                name: 'Бренды'
-            },
-            {
-                link: '/contacts',
-                name: 'Контакты'
-            },
-        ]
-
-
         return (
             <div className="bg-gray_white py-[10px]">
                 <div className="main_container">
@@ -65,6 +63,7 @@ const TopInfo: FC = () => {
                                     <Button
                                         color={'warning'}
                                         variant="contained"
+                                        onClick={test}
                                     >
                                         Ввести город
                                     </Button>

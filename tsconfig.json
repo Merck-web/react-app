@@ -1,5 +1,4 @@
 {
-  "extends": "./tsconfig.paths.json",
   "compilerOptions": {
     "outDir": "./dist",
     "target": "es6",
@@ -24,7 +23,12 @@
     "noImplicitAny": false,
     "incremental": true,
     "jsx": "preserve",
-
+    "baseUrl": "./src",
+    "paths": {
+      "@/components/*":  ["./components/*"],
+      "@/main/*":  ["./pages/main/*"],
+      "@/utils/*":  ["./utils/*"],
+    }
   },
   "include": [
     "src"
