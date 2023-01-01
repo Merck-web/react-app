@@ -5,17 +5,23 @@ import {FormControl, InputAdornment} from "@mui/material";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faDeleteLeft, faSearch} from "@fortawesome/free-solid-svg-icons";
 import InputMask from 'react-input-mask';
+import TransitionDiv from "~/components/TransitionDiv";
 
 type CustomizeInputsTypes = {
     variant?: "outlined" | "filled" | "standard",
     label?: string,
     backgroundColor: string,
-    setValue: React.Dispatch<React.SetStateAction<any>>, newValue?: string,
-    // setValue: (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, newValue?: string) => void
+    setValue: React.Dispatch<React.SetStateAction<any>>, newValue?: any,
     value: string,
     clerable?: boolean
     searchable?: boolean,
-    mask?: string
+    mask?: string,
+    borderRadius?: number,
+    borderColorFocus?: string
+    borderColor?: string,
+    textColor?: string,
+    colLabel?: boolean,
+    iconColor?: string
 }
 
 
@@ -27,18 +33,21 @@ const CustomizedInputs: React.FC<CustomizeInputsTypes> = ({
                                                               value,
                                                               clerable,
                                                               searchable,
-                                                              mask
+                                                              mask,
+                                                              borderRadius,
+                                                              borderColorFocus,
+                                                              borderColor,
+                                                              textColor,
+                                                              colLabel,
+                                                              iconColor
                                                           }) => {
-    const nodeRef = React.useRef(null);
-
     function newValueSet(event) {
         const value = event.target.value;
         setValue(value);
     }
 
-    function clearValue() {
-        console.log("click")
-        setValue("");
+    function clearValue(val) {
+        if (val) setValue("");
     }
 
     return (
@@ -49,6 +58,12 @@ const CustomizedInputs: React.FC<CustomizeInputsTypes> = ({
         >
             <FormControl className={'w-full'}>
                 {
+                    colLabel && label &&
+                    <h1 className={`font-normal text-sm text-[${textColor}] mb-1`}>
+                        {label}
+                    </h1>
+                }
+                {
                     mask ?
                         <InputMask
                             mask={mask}
@@ -58,24 +73,31 @@ const CustomizedInputs: React.FC<CustomizeInputsTypes> = ({
                             onChange={event => newValueSet(event)}
                         >
                             {() => (<TextField
-                                label={label ? label : ''}
+                                label={(label && !colLabel) ? label : ''}
                                 sx={{
                                     "& .Mui-focused": {
                                         borderColor: backgroundColor
                                     },
                                     "& .MuiOutlinedInput-input": {
-                                        borderColor: backgroundColor
+                                        borderColor: backgroundColor,
                                     },
                                     "& .MuiOutlinedInput-notchedOutline": {
                                         borderColor: backgroundColor
                                     },
                                     '& label.Mui-focused': {
-                                        color: backgroundColor,
+                                        color: textColor,
+                                    },
+                                    '& label': {
+                                        color: textColor,
                                     },
                                     '& .MuiInput-underline:after': {
                                         borderColor: backgroundColor,
                                     },
                                     '& .MuiOutlinedInput-root': {
+                                        borderRadius: `${borderRadius}px`,
+                                        backgroundColor: backgroundColor,
+                                        border: `1px solid ${borderColor}`,
+                                        color: textColor,
                                         '& fieldset': {
                                             borderColor: backgroundColor,
                                         },
@@ -83,7 +105,7 @@ const CustomizedInputs: React.FC<CustomizeInputsTypes> = ({
                                             borderColor: backgroundColor,
                                         },
                                         '&.Mui-focused fieldset': {
-                                            borderColor: backgroundColor,
+                                            borderColor: borderColorFocus,
                                         },
                                     },
                                 }}
@@ -93,19 +115,26 @@ const CustomizedInputs: React.FC<CustomizeInputsTypes> = ({
                                         endAdornment:
                                             <InputAdornment position="end">
                                                 {
-                                                    clerable && <FontAwesomeIcon
-                                                        className={'mr-2 cursor-pointer'}
-                                                        icon={faDeleteLeft}
-                                                        color={backgroundColor}
-                                                        onClick={clearValue}
-                                                    />
+                                                    clerable &&
+                                                    <TransitionDiv fadeReverse={value.length} typeAnimation={'fade'}>
+                                                        <FontAwesomeIcon
+                                                            className={`mr-2 ${value.length && 'cursor-pointer'}`}
+                                                            icon={faDeleteLeft}
+                                                            color={iconColor}
+                                                            onClick={() => clearValue(value.length)}
+                                                        />
+                                                    </TransitionDiv>
+
                                                 }
                                                 {
-                                                    searchable && <FontAwesomeIcon
-                                                        className={'mr-2 cursor-pointer'}
-                                                        icon={faSearch}
-                                                        color={backgroundColor}
-                                                    />
+                                                    searchable &&
+                                                    <TransitionDiv fadeReverse={value.length} typeAnimation={'fade'}>
+                                                        <FontAwesomeIcon
+                                                            className={`mr-2 ${value.length && 'cursor-pointer'}`}
+                                                            icon={faSearch}
+                                                            color={iconColor}
+                                                        />
+                                                    </TransitionDiv>
                                                 }
 
                                             </InputAdornment>
@@ -115,24 +144,31 @@ const CustomizedInputs: React.FC<CustomizeInputsTypes> = ({
                         </InputMask>
                         :
                         <TextField
-                            label={label ? label : ''}
+                            label={(label && !colLabel) ? label : ''}
                             sx={{
                                 "& .Mui-focused": {
                                     borderColor: backgroundColor
                                 },
                                 "& .MuiOutlinedInput-input": {
-                                    borderColor: backgroundColor
+                                    borderColor: backgroundColor,
                                 },
                                 "& .MuiOutlinedInput-notchedOutline": {
                                     borderColor: backgroundColor
                                 },
                                 '& label.Mui-focused': {
-                                    color: backgroundColor,
+                                    color: textColor,
+                                },
+                                '& label': {
+                                    color: textColor,
                                 },
                                 '& .MuiInput-underline:after': {
                                     borderColor: backgroundColor,
                                 },
                                 '& .MuiOutlinedInput-root': {
+                                    borderRadius: `${borderRadius}px`,
+                                    backgroundColor: backgroundColor,
+                                    border: `1px solid ${borderColor}`,
+                                    color: textColor,
                                     '& fieldset': {
                                         borderColor: backgroundColor,
                                     },
@@ -140,7 +176,7 @@ const CustomizedInputs: React.FC<CustomizeInputsTypes> = ({
                                         borderColor: backgroundColor,
                                     },
                                     '&.Mui-focused fieldset': {
-                                        borderColor: backgroundColor,
+                                        borderColor: borderColorFocus,
                                     },
                                 },
                             }}
@@ -152,19 +188,25 @@ const CustomizedInputs: React.FC<CustomizeInputsTypes> = ({
                                     endAdornment:
                                         <InputAdornment position="end">
                                             {
-                                                clerable && <FontAwesomeIcon
-                                                    className={'mr-2 cursor-pointer'}
-                                                    icon={faDeleteLeft}
-                                                    color={backgroundColor}
-                                                    onClick={clearValue}
-                                                />
+                                                clerable &&
+                                                <TransitionDiv fadeReverse={value.length} typeAnimation={'fade'}>
+                                                    <FontAwesomeIcon
+                                                        className={`mr-2 ${value.length && 'cursor-pointer'}`}
+                                                        icon={faDeleteLeft}
+                                                        color={iconColor}
+                                                        onClick={() => clearValue(value.length)}
+                                                    />
+                                                </TransitionDiv>
                                             }
                                             {
-                                                searchable && <FontAwesomeIcon
-                                                    className={'mr-2 cursor-pointer'}
-                                                    icon={faSearch}
-                                                    color={backgroundColor}
-                                                />
+                                                searchable &&
+                                                <TransitionDiv fadeReverse={value.length} typeAnimation={'fade'}>
+                                                    <FontAwesomeIcon
+                                                        className={`mr-2 ${value.length && 'cursor-pointer'}`}
+                                                        icon={faSearch}
+                                                        color={iconColor}
+                                                    />
+                                                </TransitionDiv>
                                             }
 
                                         </InputAdornment>

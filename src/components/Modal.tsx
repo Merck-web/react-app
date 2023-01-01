@@ -44,10 +44,11 @@ type ModalTypes = {
     children?: React.ReactElement,
     shadow?: number,
     modalName?: string,
-    colorTitle?: string
+    colorTitle?: string,
+    formText?: 'uppercase' | 'capitalize'
 }
 
-const ModalDefault: FC<ModalTypes> = forwardRef(({width, children, shadow, modalName, colorTitle}, ref) => {
+const ModalDefault: FC<ModalTypes> = forwardRef(({width, children, shadow, modalName, colorTitle, formText}, ref) => {
     const style = {
         position: 'absolute' as 'absolute',
         top: '50%',
@@ -89,13 +90,17 @@ const ModalDefault: FC<ModalTypes> = forwardRef(({width, children, shadow, modal
             >
                 <Fade in={open}>
                     <Box className={`py-3`} sx={style}>
-                        <div className={'flex items-center justify-between text-xl py-3 px-5'}>
-                            <h1 className={`text-[${colorTitle ? colorTitle : 'black'}] font-semibold`}>{modalName}</h1>
-                            <TransitionDiv typeAnimation={'rotate'}>
-                                <FontAwesomeIcon onClick={handleClose} color={`${colorTitle ? colorTitle : 'black'}`} className='cursor-pointer' icon={faClose}/>
-                            </TransitionDiv>
+                        <div className={'flex items-center justify-center relative text-xl py-3 px-5'}>
+                            <h1 className={`text-[${colorTitle ? colorTitle : 'black'}] font-semibold ${formText}`}>{modalName}</h1>
+                            <div
+                                className={'absolute flex justify-center items-center top-0 right-0 w-[40px] h-[40px]'}>
+                                <TransitionDiv typeAnimation={'default'}>
+                                    <FontAwesomeIcon onClick={handleClose}
+                                                     color={`${colorTitle ? colorTitle : 'black'}`}
+                                                     className='cursor-pointer' icon={faClose}/>
+                                </TransitionDiv>
+                            </div>
                         </div>
-                        <hr className='border-1.5 bg-black'/>
                         {children}
                     </Box>
                 </Fade>

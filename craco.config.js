@@ -1,13 +1,23 @@
-const path = require('path');
-
-const resolvePath = p => path.resolve(__dirname, p)
+const path = require("path");
+const resolve = arg => path.resolve(__dirname, arg)
 
 module.exports = {
     webpack: {
         alias: {
-            '@components': resolvePath('./src/components/*'),
-            '@main': resolvePath('./src/pages/main/*'),
-            '@utils': resolvePath('./src/utils/*')
+            "~": resolve("src/"),
+            "@components": resolve("src/components"),
+            "@utils": resolve("src/utils"),
+            "@main": resolve("src/main"),
         }
     },
-}
+    jest: {
+        configure: {
+            moduleNameMapper: {
+                "^~(.*)$": "<rootDir>/src$1",
+            },
+            roots: ["<rootDir>/src/", "<rootDir>/test/"],
+            testMatch: ["<rootDir>/test/**/?(*.)+(spec|test).[jt]s?(x)"],
+            setupFilesAfterEnv: "<rootDir>/test/setupTests.ts"
+        }
+    },
+};

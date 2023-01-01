@@ -10,10 +10,10 @@ import SendIcon from '@mui/icons-material/Send';
 import TransitionDiv from "../../../components/TransitionDiv";
 
 
-
 function Header() {
     const [targetSearch, setTargetSearch] = React.useState("");
     const [phoneCall, setPhoneCall] = React.useState("");
+    const [nameCall, setNameCall] = React.useState("");
     const modal = useRef();
 
     const socials = [
@@ -57,12 +57,17 @@ function Header() {
                             <div className={`${styles.logo} w-[242px] h-[52px] bg-cover`}/>
                         </Link>
                     </div>
-                    <div className={'max-w-[750px] w-full'}>
+                    <div className={'max-w-[750px] w-full mx-2'}>
 
 
                         <CustomizedInputs
                             variant={'outlined'}
-                            backgroundColor={'#D2334D'}
+                            backgroundColor={'#FFFFFF'}
+                            borderColorFocus={'#D2334D'}
+                            borderColor={'#D2334D'}
+                            textColor={'#ABABAB'}
+                            iconColor={'#D2334D'}
+                            borderRadius={4}
                             setValue={setTargetSearch}
                             value={targetSearch}
                             clerable={true}
@@ -111,22 +116,46 @@ function Header() {
                 ref={modal}
                 width={500}
                 shadow={12}
-                modalName={'Введите ваш номер телефона'}
-                colorTitle={'#D2334D'}
+                modalName={'Заказать звонок'}
+                formText={'uppercase'}
+                colorTitle={'#333333'}
             >
                 <>
-                    <div className='p-2 my-3.5 max-w-[400px] w-full mx-auto'>
+                    <div className='p-2 my-2 max-w-[430px] w-full mx-auto'>
                         <CustomizedInputs
-                            label={'Телефон'}
+                            setValue={setNameCall}
+                            value={nameCall}
+                            colLabel={true}
+                            label={'Ваше имя'}
                             variant={'outlined'}
-                            backgroundColor={'#D2334D'}
+                            backgroundColor={'#FAFAFA'}
+                            borderColorFocus={'#2E65F3'}
+                            borderColor={'#E0E2E7'}
+                            textColor={'#6F727A'}
+                            iconColor={'#D2334D'}
+                            borderRadius={8}
+                            clerable={true}
+                            mask={'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'}
+                        />
+                    </div>
+                    <div className='p-2 my-3.5 max-w-[430px] w-full mx-auto'>
+                        <CustomizedInputs
                             setValue={setPhoneCall}
                             value={phoneCall}
+                            colLabel={true}
+                            label={'Телефон'}
+                            variant={'outlined'}
+                            backgroundColor={'#FAFAFA'}
+                            borderColorFocus={'#2E65F3'}
+                            borderColor={'#E0E2E7'}
+                            textColor={'#6F727A'}
+                            iconColor={'#D2334D'}
+                            borderRadius={8}
                             clerable={true}
                             mask={'+7 (999) 999-99-99'}
                         />
                     </div>
-                    <div className={'flex justify-center p-2'}>
+                    <div className={'flex justify-between items-center px-10 py-2'}>
                         <TransitionDiv
                             typeAnimation={'scaleOpacity'}
                         >
@@ -141,8 +170,14 @@ function Header() {
                                     fontSize: "14px"
                                 }}
                             >
-                                Отправить заявку
+                                Отправить
                             </Button>
+                        </TransitionDiv>
+                        <TransitionDiv typeAnimation={'default'}>
+                            <p className={'text-sm text-[#9CA1AD] max-w-[250px] w-full'}>Нажимая на кнопку вы соглашаетесь <br />с&ensp;
+                                <a className={'text-[#EC3844] underline underline-offset-4'}
+                                   href={'/'} target='_blank'>политикой конфиденциальности</a>
+                            </p>
                         </TransitionDiv>
                     </div>
                 </>

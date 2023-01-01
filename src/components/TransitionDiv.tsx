@@ -2,12 +2,13 @@ import React, {FC} from 'react';
 import {motion} from "framer-motion";
 
 interface TransitionDivTypes {
-    typeAnimation?: 'default' | 'scaleOpacity' | 'rotate' | undefined,
+    typeAnimation?: 'default' | 'scaleOpacity' | 'rotate' | 'fade' | undefined,
     children?: React.ReactElement;
+    fadeReverse?: any
 }
 
 
-const TransitionDiv: FC<TransitionDivTypes> = ({typeAnimation, children}) => {
+const TransitionDiv: FC<TransitionDivTypes> = ({typeAnimation, children, fadeReverse}) => {
 
     return (
 
@@ -34,20 +35,32 @@ const TransitionDiv: FC<TransitionDivTypes> = ({typeAnimation, children}) => {
                         typeAnimation === 'rotate' ?
                             <motion.div
                                 whileHover={{
-                                    scale: [1, 1.1, 1.1, 1.1, 1],
-                                    rotate: [0, 90, 0],
+                                    scale: [1, 1.1],
+                                    rotate: [0, 360],
                                 }}
                                 whileTap={{
-                                    scale: [1.1, 1, 1, 1.1, 1.1],
-                                    rotate: [0, 90, 0],
+                                    scale: [1, 1.1],
+                                    rotate: [0, 360],
                                 }}
-
-                                transition={{duration: 1, type: 'tween', repeat: Infinity}}
+                                whileInView={{
+                                    scale: [1, 1.1],
+                                    rotate: [0, 360],
+                                }}
+                                transition={{duration: 1, type: 'spring', repeat: Infinity}}
                             >
                                 {children}
                             </motion.div>
                             :
-                            ''
+                            typeAnimation === 'fade' ?
+                                <motion.div
+                                    initial={{opacity: fadeReverse > 0 ? 0 : 1}}
+                                    animate={{opacity: fadeReverse > 0 ? 1 : 0}}
+                                    transition={{duration: 0.5}}
+                                >
+                                    {children}
+                                </motion.div>
+                                :
+                                ''
             }
         </>
 
