@@ -62,7 +62,6 @@ const ModalDefault: FC<ModalTypes> = forwardRef(({width, children, shadow, modal
     useImperativeHandle(ref, () => ({
         handleOpen: () => {
             setOpen(true);
-            return
         },
         handleClose: () => {
             setOpen(false);
@@ -94,10 +93,11 @@ const ModalDefault: FC<ModalTypes> = forwardRef(({width, children, shadow, modal
                             <h1 className={`text-[${colorTitle ? colorTitle : 'black'}] font-semibold ${formText}`}>{modalName}</h1>
                             <div
                                 className={'absolute flex justify-center items-center top-0 right-0 w-[40px] h-[40px]'}>
-                                <TransitionDiv typeAnimation={'default'}>
+                                <TransitionDiv typeAnimation={'rotate'}>
                                     <FontAwesomeIcon onClick={handleClose}
                                                      color={`${colorTitle ? colorTitle : 'black'}`}
-                                                     className='cursor-pointer' icon={faClose}/>
+                                                     className='cursor-pointer' icon={faClose}
+                                    />
                                 </TransitionDiv>
                             </div>
                         </div>

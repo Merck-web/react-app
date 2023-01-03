@@ -28,14 +28,14 @@ const TextWithIcon: FC<textWithIconType> = (
             {
                 href ?
                     <a href={`${mail ? 'mailto:' : phone ? 'tel:' : ''}${href}`}>
-                        <span className={`${classes} flex items-center`} onClick={click}>
+                        <span className={`${classes} flex items-center justify-center`} onClick={click}>
                             {before && <IconDefault name={before}/>}
                             <p className='mx-2'>{text}</p>
                             {after && <IconDefault name={after}/>}
                         </span>
                     </a>
                     :
-                    <div onClick={click} className={`${classes} flex items-center`}>
+                    <div onClick={click} className={`${classes} flex items-center justify-center`}>
                         {before && <IconDefault name={before}/>}
                         <p className='mx-2'>{text}</p>
                         {after && <IconDefault name={after}/>}

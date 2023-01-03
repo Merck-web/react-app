@@ -35,18 +35,9 @@ const TransitionDiv: FC<TransitionDivTypes> = ({typeAnimation, children, fadeRev
                         typeAnimation === 'rotate' ?
                             <motion.div
                                 whileHover={{
-                                    scale: [1, 1.1],
                                     rotate: [0, 360],
                                 }}
-                                whileTap={{
-                                    scale: [1, 1.1],
-                                    rotate: [0, 360],
-                                }}
-                                whileInView={{
-                                    scale: [1, 1.1],
-                                    rotate: [0, 360],
-                                }}
-                                transition={{duration: 1, type: 'spring', repeat: Infinity}}
+                                transition={{duration: 1, type: 'tween'}}
                             >
                                 {children}
                             </motion.div>
@@ -55,7 +46,10 @@ const TransitionDiv: FC<TransitionDivTypes> = ({typeAnimation, children, fadeRev
                                 <motion.div
                                     initial={{opacity: fadeReverse > 0 ? 0 : 1}}
                                     animate={{opacity: fadeReverse > 0 ? 1 : 0}}
-                                    transition={{duration: 0.5}}
+                                    transition={{
+                                        delay: 0.5,
+                                        duration: 1
+                                    }}
                                 >
                                     {children}
                                 </motion.div>

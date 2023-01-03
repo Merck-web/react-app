@@ -1,13 +1,15 @@
 import React, {useRef} from 'react';
 import styles from '../elementscss/Header.module.scss'
 import {Link} from "react-router-dom";
-import TextWithIcon from "../../../components/TextWithIcon";
-import IconDefault from "../../../components/IconDefault";
-import CustomizedInputs from "../../../components/CustomInput";
-import ModalDefault from "../../../components/Modal";
+import TextWithIcon from "~/components/TextWithIcon";
+import IconDefault from "~/components/IconDefault";
+import CustomizedInputs from "~/components/CustomInput";
+import ModalDefault from "~/components/Modal";
 import {Button} from "@mui/material";
 import SendIcon from '@mui/icons-material/Send';
-import TransitionDiv from "../../../components/TransitionDiv";
+import TransitionDiv from "~/components/TransitionDiv";
+import BurgerButton from "~/components/BurgerButton";
+import MobileNavMenu from "~/pages/main/components/MobileNavMenu";
 
 
 function Header() {
@@ -49,48 +51,61 @@ function Header() {
     }
 
     return (
-        <>
+        <header>
             <div className={'main_container'}>
-                <div className={'top flex items-center justify-between mt-5'}>
-                    <div>
+                <div className={'top flex items-center justify-between mt-5 max-[765px]:flex-col'}>
+                    <div className={'order-2'}>
                         <Link to={'/'}>
                             <div className={`${styles.logo} w-[242px] h-[52px] bg-cover`}/>
                         </Link>
                     </div>
-                    <div className={'max-w-[750px] w-full mx-2'}>
+                    <div className={'flex justify-center items-center w-full max-[765px]:my-3 order-3'}>
+
+                        <div className={'min-[765px]:hidden flex justify-center items-center mx-2'}>
+                            <BurgerButton/>
+                        </div>
+
+                        <div className={'max-w-[750px] max-[765px]:max-w-[400px] w-full mx-2'}>
+                            <CustomizedInputs
+                                variant={'outlined'}
+                                placeholder={'Поиск'}
+                                backgroundColor={'#FFFFFF'}
+                                borderColorFocus={'#D2334D'}
+                                borderColor={'#D2334D'}
+                                textColor={'#ABABAB'}
+                                iconColor={'#D2334D'}
+                                borderRadius={4}
+                                setValue={setTargetSearch}
+                                value={targetSearch}
+                                clerable={true}
+                                searchable={true}
+                            />
+                        </div>
 
 
-                        <CustomizedInputs
-                            variant={'outlined'}
-                            backgroundColor={'#FFFFFF'}
-                            borderColorFocus={'#D2334D'}
-                            borderColor={'#D2334D'}
-                            textColor={'#ABABAB'}
-                            iconColor={'#D2334D'}
-                            borderRadius={4}
-                            setValue={setTargetSearch}
-                            value={targetSearch}
-                            clerable={true}
-                            searchable={true}
-                        />
+                        <div className={'min-[765px]:hidden flex items-center justify-center w-[50px]'}>
+                            <IconDefault name={'UserLogin'}/>
+                        </div>
 
                     </div>
-                    <div>
+                    <div className={'max-w-[170px] w-full order-4 max-[765px]:order-2 max-[765px]:mt-5 '}>
                         <TextWithIcon
                             before={'PinkPhone'}
                             href={'88002345295'}
                             text={'8-800-2345-295'}
                             phone={true}
-                            classes={["text-[#D2334D] font-bold text-[24px] cursor-pointer"]}
+                            classes={
+                                ["text-[#D2334D] font-bold 2xl:text-[24px] xl:text-lg lg:text-base sm:text-sm cursor-pointer"]
+                            }
                         />
                         <span
-                            className={`${styles.calling} text-[#D2334D] text-[12px] leading-[20px] font-semibold cursor-pointer`}
+                            className={`${styles.calling} text-[#D2334D] max-[765px]:hidden text-[12px] leading-[20px] font-semibold cursor-pointer`}
                             onClick={openModalCalling}
                         >
                             Заказать звонок
                         </span>
                     </div>
-                    <div className={'socials_box'}>
+                    <div className={'socials_box max-[765px]:hidden order-4'}>
                         <ul className={'flex items-center'}>
                             {
                                 socials.map((social, index) => {
@@ -174,7 +189,8 @@ function Header() {
                             </Button>
                         </TransitionDiv>
                         <TransitionDiv typeAnimation={'default'}>
-                            <p className={'text-sm text-[#9CA1AD] max-w-[250px] w-full'}>Нажимая на кнопку вы соглашаетесь <br />с&ensp;
+                            <p className={'text-sm text-[#9CA1AD] max-w-[250px] w-full'}>Нажимая на кнопку вы
+                                соглашаетесь <br/>с&ensp;
                                 <a className={'text-[#EC3844] underline underline-offset-4'}
                                    href={'/'} target='_blank'>политикой конфиденциальности</a>
                             </p>
@@ -182,7 +198,9 @@ function Header() {
                     </div>
                 </>
             </ModalDefault>
-        </>
+
+            <MobileNavMenu />
+        </header>
     );
 }
 

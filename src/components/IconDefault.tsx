@@ -6,7 +6,6 @@ type BaseIconTypes = {
 }
 
 const IconDefault: FC<BaseIconTypes> = ({name}) => {
-
     const htmlText = icons[name] || '';
     return (
         <div

@@ -21,7 +21,8 @@ type CustomizeInputsTypes = {
     borderColor?: string,
     textColor?: string,
     colLabel?: boolean,
-    iconColor?: string
+    iconColor?: string,
+    placeholder?: string
 }
 
 
@@ -39,7 +40,8 @@ const CustomizedInputs: React.FC<CustomizeInputsTypes> = ({
                                                               borderColor,
                                                               textColor,
                                                               colLabel,
-                                                              iconColor
+                                                              iconColor,
+                                                              placeholder
                                                           }) => {
     function newValueSet(event) {
         const value = event.target.value;
@@ -74,6 +76,7 @@ const CustomizedInputs: React.FC<CustomizeInputsTypes> = ({
                         >
                             {() => (<TextField
                                 label={(label && !colLabel) ? label : ''}
+                                placeholder={placeholder}
                                 sx={{
                                     "& .Mui-focused": {
                                         borderColor: backgroundColor
@@ -145,6 +148,7 @@ const CustomizedInputs: React.FC<CustomizeInputsTypes> = ({
                         :
                         <TextField
                             label={(label && !colLabel) ? label : ''}
+                            placeholder={placeholder}
                             sx={{
                                 "& .Mui-focused": {
                                     borderColor: backgroundColor
