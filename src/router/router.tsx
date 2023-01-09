@@ -12,6 +12,15 @@ const RouterView = () => {
                 <Route path='/' element={<Home/>}/>
                 <Route path='/topics' element={<Home/>}/>
                 <Route path='/settings' element={<Home/>}/>
+
+                <Route
+                    path="*"
+                    element={
+                        <div>
+                            <h2>404 Page not found</h2>
+                        </div>
+                    }
+                />
             </Routes>
         </React.Suspense>
     );

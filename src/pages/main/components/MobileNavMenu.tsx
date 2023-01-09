@@ -16,7 +16,7 @@ const MobileNavMenu: FC = () => {
             className={`transition-all min-[765px]:hidden ${openNav ? '' : 'hidden'} fixed top-[${height}px] left-0 w-full max-h-[calc(100vh_-_174px)] overflow-y-scroll bg-[#FAFAFA] pb-20 shadow-navShadow  `}
         >
             <div className={`px-[15px] py-[20px] `}>
-                <Catalog/>
+                <Catalog type={'mobile'} />
                 ssdfhf
             </div>
         </div>

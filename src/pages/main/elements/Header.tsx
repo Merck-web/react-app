@@ -10,6 +10,7 @@ import SendIcon from '@mui/icons-material/Send';
 import TransitionDiv from "~/components/TransitionDiv";
 import BurgerButton from "~/components/BurgerButton";
 import MobileNavMenu from "~/pages/main/components/MobileNavMenu";
+import Catalog from "~/pages/main/components/Catalog";
 
 
 function Header() {
@@ -88,7 +89,7 @@ function Header() {
                         </div>
 
                     </div>
-                    <div className={'max-w-[170px] w-full order-4 max-[765px]:order-2 max-[765px]:mt-5 '}>
+                    <div className={'max-w-[240px] w-full order-4 max-[765px]:order-2 max-[765px]:mt-5 '}>
                         <TextWithIcon
                             before={'PinkPhone'}
                             href={'88002345295'}
@@ -125,6 +126,14 @@ function Header() {
 
                 </div>
             </div>
+
+
+            <div className={'max-[765px]:hidden'}>
+                <Catalog type={'desktop'}/>
+            </div>
+
+            <MobileNavMenu/>
+
 
             <ModalDefault
                 // @ts-ignore
@@ -198,8 +207,6 @@ function Header() {
                     </div>
                 </>
             </ModalDefault>
-
-            <MobileNavMenu />
         </header>
     );
 }

@@ -35,7 +35,7 @@ const TextWithIcon: FC<textWithIconType> = (
                         </span>
                     </a>
                     :
-                    <div onClick={click} className={`${classes} flex items-center justify-center`}>
+                    <div onClick={click} className={`${classes} flex items-center justify-center whitespace-nowrap`}>
                         {before && <IconDefault name={before}/>}
                         <p className='mx-2'>{text}</p>
                         {after && <IconDefault name={after}/>}
