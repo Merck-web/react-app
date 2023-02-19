@@ -7,6 +7,7 @@ import RouterView from "./router/router";
 ///REDUX
 import {Provider} from 'react-redux';
 import {store} from './redux/store';
+import FavoritesShoppingCartStatistics from "~/pages/main/components/FavoritesShoppingCartStatistics";
 ///REDUX
 
 ///CONTEXT
@@ -32,6 +33,7 @@ function App() {
             <Context.Provider value={{city, setCity, links, openNav, setOpenNav}}>
                 <TopInfo/>
                 <Header/>
+                <FavoritesShoppingCartStatistics />
                 <RouterView/>
             </Context.Provider>
         </Provider>

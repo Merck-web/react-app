@@ -374,51 +374,54 @@ const Catalog: FC<ICatalog> = ({type}) => {
                         </motion.ul>
                     </motion.nav>
                     :
-                    <div className={'main_container'}>
-                        <div className={'flex items-center justify-between'}>
-                            <ul className={'flex items-center justify-start mt-5'}>
-                                {
-                                    catalogs.map((item, index) => {
-                                        return (
-                                            <li
-                                                key={item.name}
-                                                className='mb-[10px] mr-[25px] cursor-pointer'
-                                            >
-                                                <div
-                                                    className={`${activeMenu === index ? 'scale-125' : ''} transition-all`}
-                                                    onClick={() => targetOpenMenu(index)}
+                    <div className={'border mt-2.5'}>
+                        <div className={'main_container'}>
+                            <div className={'flex items-center justify-start'}>
+                                <ul className={'flex items-center justify-start pt-1.5 border-r'}>
+                                    {
+                                        catalogs.map((item, index) => {
+                                            return (
+                                                <li
+                                                    key={item.name}
+                                                    className='mb-[5px] mr-[25px] cursor-pointer'
                                                 >
                                                     <div
-                                                        className={`
+                                                        className={`${activeMenu === index ? 'scale-125' : ''} transition-all`}
+                                                        onClick={() => targetOpenMenu(index)}
+                                                    >
+                                                        <div
+                                                            className={`
                                                         flex rounded items-center justify-between
                                                         2xl:px-[10px] 2xl:py-[15px] text-[16px]
                                                         xl:px-[9px] xl:py-[10px] text-[16px]
                                                         lg:px-[8px] lg:py-[9px] text-[15px]
                                                         md:px-[5px] md:py-[7px] text-[15px]
                                                         sm:px-[5px] sm:py-[5px] text-[14px]
-                                                        ${activeMenu === index ? 'bg-mainPink px-3' 
-                                                            : ''
-                                                        }
+                                                        ${activeMenu === index ? 'bg-mainPink px-3'
+                                                                : ''
+                                                            }
                                                         `}
-                                                    >
-                                                        <p className={`text-[#222222] ${activeMenu === index ? 'text-neutral-50' : ''} uppercase font-semibold `}>{item.name}</p>
+                                                        >
+                                                            <p className={`text-[#222222] ${activeMenu === index ? 'text-neutral-50' : ''} uppercase font-semibold `}>{item.name}</p>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </li>
-                                        )
-                                    })
-                                }
-                            </ul>
-                            <div>
-                                <TextWithIcon
-                                    before={'Sales'}
-                                    text={'Скидки'}
-                                    classes={['uppercase leading-[22px] text-[18px] text-mainPink font-bold cursor-pointer mt-1.5']}
-                                />
+                                                </li>
+                                            )
+                                        })
+                                    }
+                                </ul>
+                                <div className={'ml-3 pb-1.5'}>
+                                    <TextWithIcon
+                                        before={'Sales'}
+                                        text={'Скидки'}
+                                        classes={['uppercase leading-[22px] text-[18px] text-mainPink font-bold cursor-pointer mt-1.5']}
+                                    />
+                                </div>
                             </div>
-                        </div>
 
+                        </div>
                     </div>
+
             }
         </>
 
